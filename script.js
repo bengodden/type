@@ -13,11 +13,7 @@ bodyTextArea.placeholder =
 \n
 <Right Alt> + y = ý \n
 <Right Alt> + n = ń \n
-\n
-<Right Alt> + <Shift> + e = ê \n
-<Right Alt> + <Shift> + i = î \n
-<Right Alt> + <Shift> + o = ô \n
-<Right Alt> + <Shift> + a = â \n`
+\n`
 bodyTextArea.style.fontSize = "12pt";
 const mainMenu = document.getElementById("main-menu-container")
 
@@ -48,8 +44,105 @@ hotkeys.innerText=
 \n
 ý = <Right Alt> + y\n
 ń = <Right Alt> + n\n
-\n
-ê = <Right Alt> + <Shift> + e\n
-î = <Right Alt> + <Shift> + i\n
-ô = <Right Alt> + <Shift> + o\n
-â = <Right Alt> + <Shift> + a\n`
+\n`
+
+window.addEventListener('keydown', (event) => {
+    const container = document.getElementById("document-text-area")
+    console.log("event is",event)
+            let modifiedEntry = ''
+            if (event.getModifierState('AltGraph')){
+                const cursorStart = event.target.selectionStart
+                const cursorEnd = event.target.selectionEnd
+                const originalChar = event.target.value
+                    switch (event.key){
+                        case "e":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ē' + originalChar.slice(cursorEnd)
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ē' + originalChar.slice(cursorEnd)
+                        break;
+                        case "i":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ī' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ī' + originalChar.slice(cursorEnd)
+                        break;
+                        case "a":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ā' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ā' + originalChar.slice(cursorEnd)
+                        break;
+                        case "o":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ō' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ō' + originalChar.slice(cursorEnd)
+                        break;
+                        case "y":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ý' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ý' + originalChar.slice(cursorEnd)
+                        break;
+                        case "n":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ń' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ń' + originalChar.slice(cursorEnd)
+                        break;
+                        default:
+                    }
+                } else if (event.getModifierState('AltGraph') && event.shiftKey){
+                    console.log("alt and shift pressed")
+                    const cursorStart = event.target.selectionStart
+                    const cursorEnd = event.target.selectionEnd
+                    const originalChar = event.target.value
+                    switch (event.key){
+                        case "e":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ê' + originalChar.slice(cursorEnd)
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ê' + originalChar.slice(cursorEnd)
+                        break;
+                        case "i":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'î' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'î' + originalChar.slice(cursorEnd)
+                        break;
+                        case "a":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'â' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'â' + originalChar.slice(cursorEnd)
+                        break;
+                        case "o":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ô' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ô' + originalChar.slice(cursorEnd)
+                        break;
+                        case "y":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ý' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ý' + originalChar.slice(cursorEnd)
+                        break;
+                        case "n":
+                            event.target.value = originalChar.slice(originalChar, cursorStart) + 'ń' + originalChar.slice(cursorEnd) 
+                            event.target.selectionStart = event.target.selectionEnd = cursorStart +1;
+                            event.preventDefault();
+                            modifiedEntry = originalChar.slice(originalChar, cursorStart) + 'ń' + originalChar.slice(cursorEnd)
+                        break;
+                        default:
+                    
+                }
+                
+                if(document.getElementById(container) && modifiedEntry !==''){
+                    document.getElementById(container).dispatchEvent(new Event('input'))
+                }
+            
+    }
+
+});
